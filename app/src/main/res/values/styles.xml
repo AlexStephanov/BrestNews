@@ -15,7 +15,17 @@
 
     <style name="Caption" parent="@android:style/TextAppearance">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textColor">#787878</item>
+    </style>
+
+    <style name="InfoDate" parent="android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorLightGray</item>
+    </style>
+
+    <style name="InfoSource" parent="android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 </resources>
