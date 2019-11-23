@@ -1,15 +1,18 @@
-package com.alexstephanov.brestnews
+package com.alexstephanov.brestnews.ui
 
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.alexstephanov.brestnews.R
+import com.alexstephanov.brestnews.listeners.ItemClickListener
+import com.alexstephanov.brestnews.models.NewsItem
 import com.squareup.picasso.Picasso
+import io.realm.RealmList
 
-class DataAdapter(private val items: ArrayList<NewsItem>) : RecyclerView.Adapter<DataAdapter.ViewHolder>() {
+class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter<DataAdapter.ViewHolder>() {
 
     private var itemClickListener: ItemClickListener? = null
 
@@ -23,7 +26,7 @@ class DataAdapter(private val items: ArrayList<NewsItem>) : RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position]!!)
     }
 
     fun setItemClickListener(itemClickListener: ItemClickListener) {
@@ -31,7 +34,7 @@ class DataAdapter(private val items: ArrayList<NewsItem>) : RecyclerView.Adapter
     }
 
     fun getItemByPosition(position: Int) : NewsItem {
-        return items[position]
+        return items[position]!!
     }
 
     fun update(list: ArrayList<NewsItem>) {
@@ -46,11 +49,25 @@ class DataAdapter(private val items: ArrayList<NewsItem>) : RecyclerView.Adapter
             val thumbnailImageView: ImageView = itemView.findViewById(R.id.image_view_list_item_thumbnail)
             val titleTextView: TextView = itemView.findViewById(R.id.text_view_list_item_title)
             val descriptionTextView: TextView = itemView.findViewById(R.id.text_view_list_item_description)
+            val publicationDateTextView: TextView = itemView.findViewById(R.id.text_view_list_item_publication_date)
+            val sourceTextView: TextView = itemView.findViewById(R.id.text_view_list_item_source)
 
             titleTextView.text = item.title
             descriptionTextView.text = item.description
+            publicationDateTextView.text = item.date
+
+            sourceTextView.text = when {
+                item.link.contains("onlinebrest") -> "onlinebrest.by"
+                item.link.contains("virtualbrest") -> "virtualbrest.by"
+                item.link.contains("brestcity") -> "brestcity.com"
+                else -> "unknown"
+            }
 
             Picasso.get().load(item.thumbnail).into(thumbnailImageView)
+
+            itemView.setOnClickListener {
+                (thumbnailImageView.context as MainActivity).showArticle(item.title, item.thumbnail, item.date, item.link)
+            }
         }
 
         override fun onClick(v: View?) {

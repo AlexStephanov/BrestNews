@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_view_detailed_title"
+                style="@style/Subhead.Detailed"
+                android:layout_marginTop="@dimen/spacing_32dp"
+                android:layout_marginStart="@dimen/spacing_16dp"
+                android:layout_marginEnd="@dimen/spacing_16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/image_view_detailed_image"
+                android:layout_marginTop="@dimen/spacing_32dp"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:contentDescription="Image" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_view_detailed_date"
+                android:layout_marginTop="@dimen/spacing_32dp"
+                android:layout_marginStart="@dimen/spacing_16dp"
+                android:layout_marginBottom="@dimen/spacing_32dp"
+                android:layout_alignParentStart="true"
+                style="@style/Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/text_view_detailed_show_original"
+                android:layout_marginTop="@dimen/spacing_32dp"
+                android:layout_marginEnd="@dimen/spacing_16dp"
+                android:layout_marginBottom="@dimen/spacing_32dp"
+                android:layout_alignParentEnd="true"
+                style="@style/Caption.Original"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
