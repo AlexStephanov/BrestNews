@@ -20,17 +20,26 @@
             <TextView
                 android:id="@+id/text_view_detailed_title"
                 style="@style/Subhead.Detailed"
-                android:layout_marginTop="@dimen/spacing_32dp"
+                android:layout_marginTop="@dimen/spacing_16dp"
                 android:layout_marginStart="@dimen/spacing_16dp"
                 android:layout_marginEnd="@dimen/spacing_16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:id="@+id/image_view_detailed_image"
-                android:layout_marginTop="@dimen/spacing_32dp"
+                android:layout_marginTop="@dimen/spacing_16dp"
                 android:layout_width="300dp"
                 android:layout_height="150dp"
-                android:contentDescription="Image" />
+                android:contentDescription="@string/image" />
+
+            <TextView
+                android:id="@+id/text_view_detailed_content"
+                style="@style/Caption.Detailed"
+                android:layout_marginTop="@dimen/spacing_16dp"
+                android:layout_marginStart="@dimen/spacing_8dp"
+                android:layout_marginEnd="@dimen/spacing_8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
 
         </LinearLayout>
@@ -38,13 +47,13 @@
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_16dp"
+            android:layout_marginBottom="@dimen/spacing_32dp">
 
             <TextView
                 android:id="@+id/text_view_detailed_date"
-                android:layout_marginTop="@dimen/spacing_32dp"
                 android:layout_marginStart="@dimen/spacing_16dp"
-                android:layout_marginBottom="@dimen/spacing_32dp"
                 android:layout_alignParentStart="true"
                 style="@style/Caption"
                 android:layout_width="wrap_content"
@@ -52,9 +61,7 @@
 
             <TextView
                 android:id="@+id/text_view_detailed_show_original"
-                android:layout_marginTop="@dimen/spacing_32dp"
                 android:layout_marginEnd="@dimen/spacing_16dp"
-                android:layout_marginBottom="@dimen/spacing_32dp"
                 android:layout_alignParentEnd="true"
                 style="@style/Caption.Original"
                 android:layout_width="wrap_content"

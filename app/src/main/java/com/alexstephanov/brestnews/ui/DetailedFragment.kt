@@ -17,11 +17,15 @@ class DetailedFragment : Fragment() {
     var thumbnail: String? = null
     var date: String? = null
     var link: String? = null
+    var text: ArrayList<String>? = null
+    var img: ArrayList<String>? = null
 
     lateinit var titleTextView: TextView
     lateinit var thumbnailImageView: ImageView
     lateinit var dateTextView: TextView
     lateinit var showOriginalTextView: TextView
+    lateinit var contentTextView: TextView
+    lateinit var imagesImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +34,8 @@ class DetailedFragment : Fragment() {
         thumbnail = arguments?.getString("thumbnail")
         date = arguments?.getString("date")
         link = arguments?.getString("link")
+        text = arguments?.getStringArrayList("text")
+        img = arguments?.getStringArrayList("img")
     }
 
     override fun onCreateView(
@@ -43,6 +49,7 @@ class DetailedFragment : Fragment() {
         thumbnailImageView = view.findViewById(R.id.image_view_detailed_image)
         dateTextView = view.findViewById(R.id.text_view_detailed_date)
         showOriginalTextView = view.findViewById(R.id.text_view_detailed_show_original)
+        contentTextView = view.findViewById(R.id.text_view_detailed_content)
 
         return view
     }
@@ -55,9 +62,23 @@ class DetailedFragment : Fragment() {
         dateTextView.text = date
 
         val showOriginalText = "Источник: ${getNameOfSource()}\nПоказать оригинал"
-
         showOriginalTextView.text = showOriginalText
 
+        var content = ""
+        for(s in text!!)
+            content += "    $s\n\n"
+        content = content.replace("&laquo;", "\"")
+        content = content.replace("&raquo;", "\"")
+        content = content.replace("&nbsp;", " ")
+        content = content.replace("&ndash;", "-")
+        content = content.replace("&mdash;", "-")
+        content = content.replace("&hellip;", "...")
+        content = content.replace("&bdquo;", "\"")
+        content = content.replace("&ldquo;", "\"")
+        content = content.replace("&minus;", "-")
+        content = content.replace("\\", "")
+
+        contentTextView.text = content
         showOriginalTextView.setOnClickListener {
             link?.let { it1 -> (thumbnailImageView.context as MainActivity).browseArticle(it1) }
         }

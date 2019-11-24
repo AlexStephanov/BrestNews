@@ -52,6 +52,12 @@ class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter
             val publicationDateTextView: TextView = itemView.findViewById(R.id.text_view_list_item_publication_date)
             val sourceTextView: TextView = itemView.findViewById(R.id.text_view_list_item_source)
 
+            val convertText: ArrayList<String> = ArrayList()
+            convertText.addAll(item.text)
+
+            val convertImg: ArrayList<String> = ArrayList()
+            convertImg.addAll(item.img)
+
             titleTextView.text = item.title
             descriptionTextView.text = item.description
             publicationDateTextView.text = item.date
@@ -66,7 +72,7 @@ class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter
             Picasso.get().load(item.thumbnail).into(thumbnailImageView)
 
             itemView.setOnClickListener {
-                (thumbnailImageView.context as MainActivity).showArticle(item.title, item.thumbnail, item.date, item.link)
+                (thumbnailImageView.context as MainActivity).showArticle(item.title, item.thumbnail, item.date, item.link, convertText, convertImg)
             }
         }
 

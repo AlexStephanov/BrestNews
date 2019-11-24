@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Brest News</string>
-    <string name="logo">LOGO</string>
+    <string name="logo">Logo</string>
+    <string name="image">Image</string>
 </resources>
