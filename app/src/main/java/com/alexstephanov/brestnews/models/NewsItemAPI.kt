@@ -8,6 +8,5 @@ class NewsItemAPI(
     val thumbnail: String,
     val date: String,
     val link: String,
-    val text: RealmList<String>,
-    val img: RealmList<String>
+    val text: RealmList<String>
 )

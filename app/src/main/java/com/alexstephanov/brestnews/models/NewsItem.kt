@@ -9,6 +9,5 @@ open class NewsItem(
     var thumbnail: String = "",
     var date: String = "",
     var link: String = "",
-    var text: RealmList<String> = RealmList(),
-    var img: RealmList<String> = RealmList()
+    var text: RealmList<String> = RealmList()
 ) : RealmObject()

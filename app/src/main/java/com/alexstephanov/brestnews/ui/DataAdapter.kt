@@ -7,14 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alexstephanov.brestnews.R
-import com.alexstephanov.brestnews.listeners.ItemClickListener
 import com.alexstephanov.brestnews.models.NewsItem
 import com.squareup.picasso.Picasso
 import io.realm.RealmList
 
 class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter<DataAdapter.ViewHolder>() {
-
-    private var itemClickListener: ItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView : View = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
@@ -27,10 +24,6 @@ class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position]!!)
-    }
-
-    fun setItemClickListener(itemClickListener: ItemClickListener) {
-        this.itemClickListener = itemClickListener
     }
 
     fun getItemByPosition(position: Int) : NewsItem {
@@ -55,16 +48,13 @@ class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter
             val convertText: ArrayList<String> = ArrayList()
             convertText.addAll(item.text)
 
-            val convertImg: ArrayList<String> = ArrayList()
-            convertImg.addAll(item.img)
-
             titleTextView.text = item.title
             descriptionTextView.text = item.description
             publicationDateTextView.text = item.date
 
             sourceTextView.text = when {
                 item.link.contains("onlinebrest") -> "onlinebrest.by"
-                item.link.contains("virtualbrest") -> "virtualbrest.by"
+                item.link.contains("vb.by") -> "vb.by"
                 item.link.contains("brestcity") -> "brestcity.com"
                 else -> "unknown"
             }
@@ -72,12 +62,11 @@ class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter
             Picasso.get().load(item.thumbnail).into(thumbnailImageView)
 
             itemView.setOnClickListener {
-                (thumbnailImageView.context as MainActivity).showArticle(item.title, item.thumbnail, item.date, item.link, convertText, convertImg)
+                (thumbnailImageView.context as MainActivity).showArticle(item.title, item.thumbnail, item.date, item.link, convertText)
             }
         }
 
         override fun onClick(v: View?) {
-            //itemClickListener?.onItemClick(v!!, adapterPosition, this@DataAdapter)
         }
 
     }

@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">Brest News</string>
-    <string name="logo">Logo</string>
-    <string name="image">Image</string>
+    <string name="app_name">Новости Бреста</string>
+    <string name="main_title">Последние новости</string>
+    <string name="logo">Логотип</string>
+    <string name="image">Картинка</string>
+    <string name="search">Поиск</string>
+    <string name="settings">Настройки</string>
+    <string name="about">О программе</string>
 </resources>

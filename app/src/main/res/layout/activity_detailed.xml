@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.DetailedActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,13 +35,11 @@
 
             <TextView
                 android:id="@+id/text_view_detailed_content"
-                style="@style/Caption.Detailed"
                 android:layout_marginTop="@dimen/spacing_16dp"
                 android:layout_marginStart="@dimen/spacing_8dp"
                 android:layout_marginEnd="@dimen/spacing_8dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
 
         </LinearLayout>
 
@@ -65,7 +64,7 @@
                 android:layout_alignParentEnd="true"
                 style="@style/Caption.Original"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
     </LinearLayout>
