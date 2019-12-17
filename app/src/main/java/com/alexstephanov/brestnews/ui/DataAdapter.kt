@@ -1,5 +1,6 @@
 package com.alexstephanov.brestnews.ui
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,16 +27,6 @@ class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter
         holder.bind(items[position]!!)
     }
 
-    fun getItemByPosition(position: Int) : NewsItem {
-        return items[position]!!
-    }
-
-    fun update(list: ArrayList<NewsItem>) {
-        this.items.clear()
-        this.items.addAll(list)
-        notifyDataSetChanged()
-    }
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         fun bind(item: NewsItem) {
@@ -48,8 +39,11 @@ class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter
             val convertText: ArrayList<String> = ArrayList()
             convertText.addAll(item.text)
 
-            titleTextView.text = item.title
-            descriptionTextView.text = item.description
+            val newTitle: String = replaceSpecialSymbols(item.title)
+            val newDescription: String = replaceSpecialSymbols(item.description)
+
+            titleTextView.text = newTitle
+            descriptionTextView.text = newDescription
             publicationDateTextView.text = item.date
 
             sourceTextView.text = when {
@@ -69,5 +63,25 @@ class DataAdapter(private val items: RealmList<NewsItem>) : RecyclerView.Adapter
         override fun onClick(v: View?) {
         }
 
+        private fun replaceSpecialSymbols(content: String) : String {
+            var convertedContent = ""
+            if(content.contains("&") && content.contains(";")) {
+                convertedContent = content.replace("&laquo;", "\"")
+                convertedContent = convertedContent.replace("&raquo;", "\"")
+                convertedContent = convertedContent.replace("&nbsp;", " ")
+                convertedContent = convertedContent.replace("&ndash;", "-")
+                convertedContent = convertedContent.replace("&mdash;", "-")
+                convertedContent = convertedContent.replace("&hellip;", "...")
+                convertedContent = convertedContent.replace("&bdquo;", "\"")
+                convertedContent = convertedContent.replace("&ldquo;", "\"")
+                convertedContent = convertedContent.replace("&minus;", "-")
+                convertedContent = convertedContent.replace("&rsquo;", "\"")
+                convertedContent = convertedContent.replace("&rdquo;", "\"")
+                convertedContent = convertedContent.replace("\\", "")
+
+                return convertedContent
+            }
+            return content
+        }
     }
 }

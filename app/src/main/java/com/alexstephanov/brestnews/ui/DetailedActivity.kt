@@ -3,6 +3,10 @@ package com.alexstephanov.brestnews.ui
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ImageSpan
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ImageView
@@ -29,7 +33,6 @@ class DetailedActivity : AppCompatActivity(), View.OnClickListener {
         val dateTextView: TextView = findViewById(R.id.text_view_detailed_date)
         val showOriginalTextView: TextView = findViewById(R.id.text_view_detailed_show_original)
         val contentTextView: TextView = findViewById(R.id.text_view_detailed_content)
-        //val contentListView: ListView = findViewById(R.id.list_view_detailed_content)
 
         val intent = intent
         title = intent.getStringExtra("title")
@@ -38,7 +41,9 @@ class DetailedActivity : AppCompatActivity(), View.OnClickListener {
         link = intent.getStringExtra("link")
         content = intent.getStringArrayListExtra("content")
 
-        titleTextView.text = title
+        var newStr = title
+        newStr = replaceSpecialSymbols(newStr!!)
+        titleTextView.text = newStr
         Picasso.get().load(thumbnail).into(thumbnailImageView)
         dateTextView.text = date
 
@@ -48,21 +53,17 @@ class DetailedActivity : AppCompatActivity(), View.OnClickListener {
             browseArticle(link)
         }
 
-
         var convertedContent = ""
         for(s in content!!) {
-            convertedContent += "    $s\n\n"
+            if(!s.contains("jpg") && !s.contains("<center>")) {
+                convertedContent += "    $s\n\n"
+            } else {
+                Log.d("img", s)
+            }
         }
         convertedContent = replaceSpecialSymbols(convertedContent)
 
         contentTextView.text = convertedContent
-
-        /*val arrayAdapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, content!!)
-        contentListView.adapter = arrayAdapter
-
-        showOriginalTextView.setOnClickListener {
-            browseArticle(link)
-        }*/
     }
 
     private fun browseArticle(link: String?) {
@@ -90,7 +91,10 @@ class DetailedActivity : AppCompatActivity(), View.OnClickListener {
             convertedContent = convertedContent.replace("&bdquo;", "\"")
             convertedContent = convertedContent.replace("&ldquo;", "\"")
             convertedContent = convertedContent.replace("&minus;", "-")
+            convertedContent = convertedContent.replace("&rsquo;", "\"")
+            convertedContent = convertedContent.replace("&rdquo;", "\"")
             convertedContent = convertedContent.replace("\\", "")
+            convertedContent = convertedContent.replace("\\\\", "")
 
             return convertedContent
         }
@@ -98,6 +102,5 @@ class DetailedActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        //browseArticle(link)
     }
 }
